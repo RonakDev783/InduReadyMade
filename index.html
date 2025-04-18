@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InduReadyMade - Premium Fashion Clothing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#000000',secondary:'#ffffff'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Montserrat', sans-serif;
+}
+.hero-section {
+background-image: url('https://readdy.ai/api/search-image?query=high-end%20fashion%20photography%20with%20elegant%20models%20wearing%20stylish%20black%20and%20white%20clothing%2C%20professional%20studio%20lighting%2C%20minimalist%20clean%20background%2C%20high%20contrast%2C%20fashion%20editorial%20style%2C%20monochromatic%20color%20scheme%2C%20dramatic%20shadows%2C%20luxury%20fashion%20aesthetic&width=1920&height=1080&seq=1&orientation=landscape');
+background-size: cover;
+background-position: center;
+transition: background-image 0.5s ease;
+}
+.hero-content {
+opacity: 1;
+transform: translateY(0);
+transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.hero-content.hidden {
+opacity: 0;
+transform: translateY(20px);
+position: absolute;
+pointer-events: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.product-card:hover .quick-view {
+opacity: 1;
+}
+.product-card:hover img {
+transform: scale(1.05);
+}
+.category-card:hover img {
+transform: scale(1.05);
+}
+.category-card:hover .category-overlay {
+opacity: 1;
+}
+.modal {
+transition: opacity 0.3s ease;
+}
+.product-modal {
+transform: translateY(50px);
+transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal.active .product-modal {
+transform: translateY(0);
+}
+.custom-checkbox {
+position: relative;
+display: inline-block;
+width: 18px;
+height: 18px;
+margin-right: 8px;
+}
+.custom-checkbox input {
+opacity: 0;
+position: absolute;
+}
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 18px;
+width: 18px;
+border: 1px solid #ccc;
+background-color: white;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: black;
+border-color: black;
+}
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-checkbox .checkmark:after {
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-radio {
+position: relative;
+display: inline-block;
+width: 18px;
+height: 18px;
+margin-right: 8px;
+}
+.custom-radio input {
+opacity: 0;
+position: absolute;
+}
+.radio-mark {
+position: absolute;
+top: 0;
+left: 0;
+height: 18px;
+width: 18px;
+border-radius: 50%;
+border: 1px solid #ccc;
+background-color: white;
+}
+.custom-radio input:checked ~ .radio-mark {
+border-color: black;
+}
+.radio-mark:after {
+content: "";
+position: absolute;
+display: none;
+}
+.custom-radio input:checked ~ .radio-mark:after {
+display: block;
+}
+.custom-radio .radio-mark:after {
+top: 4px;
+left: 4px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: black;
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 36px;
+height: 20px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+transition: .4s;
+border-radius: 34px;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 16px;
+width: 16px;
+left: 2px;
+bottom: 2px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: black;
+}
+input:checked + .slider:before {
+transform: translateX(16px);
+}
+.range-slider {
+-webkit-appearance: none;
+width: 100%;
+height: 2px;
+background: #ccc;
+outline: none;
+}
+.range-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: black;
+cursor: pointer;
+}
+.range-slider::-moz-range-thumb {
+width: 16px;
+height: 16px;
+border-radius: 50%;
+background: black;
+cursor: pointer;
+border: none;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header Navigation -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-4 flex items-center justify-between">
+<div class="flex items-center space-x-8">
+<a href="#" class="text-3xl font-['Pacifico'] text-primary">InduReadyMade</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="#men" class="text-gray-800 hover:text-primary font-medium transition-colors">Men</a>
+<a href="#women" class="text-gray-800 hover:text-primary font-medium transition-colors">Women</a>
+<a href="#kids" class="text-gray-800 hover:text-primary font-medium transition-colors">Kids</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="w-10 h-10 flex items-center justify-center cursor-pointer">
+<i class="ri-search-line text-gray-700 ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center cursor-pointer">
+<i class="ri-user-line text-gray-700 ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center cursor-pointer">
+<i class="ri-heart-line text-gray-700 ri-lg"></i>
+</div>
+<div class="w-10 h-10 flex items-center justify-center cursor-pointer">
+<i class="ri-shopping-bag-line text-gray-700 ri-lg"></i>
+</div>
+<div class="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer">
+<i class="ri-menu-line text-gray-700 ri-lg"></i>
+</div>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section id="hero-carousel" class="hero-section w-full h-screen relative mt-16">
+<div class="absolute inset-0 bg-black bg-opacity-30"></div>
+<div class="container mx-auto px-4 h-full flex items-center">
+<div class="max-w-xl text-white z-10">
+<div class="hero-content" data-slide="1">
+<h1 class="text-5xl md:text-6xl font-light mb-4">Elegance in Every Stitch</h1>
+<p class="text-xl mb-8">Discover our new collection that redefines modern fashion with timeless elegance and uncompromising quality.</p>
+<button class="bg-white text-primary px-8 py-3 font-medium !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap">Shop Collection</button>
+</div>
+<div class="hero-content hidden" data-slide="2">
+<h1 class="text-5xl md:text-6xl font-light mb-4">Luxury Redefined</h1>
+<p class="text-xl mb-8">Experience the perfect blend of contemporary design and traditional craftsmanship in our latest collection.</p>
+<button class="bg-white text-primary px-8 py-3 font-medium !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap">Explore Now</button>
+</div>
+<div class="hero-content hidden" data-slide="3">
+<h1 class="text-5xl md:text-6xl font-light mb-4">Timeless Style</h1>
+<p class="text-xl mb-8">Curated pieces that transcend seasons, designed for those who appreciate enduring sophistication.</p>
+<button class="bg-white text-primary px-8 py-3 font-medium !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap">View Collection</button>
+</div>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 flex space-x-4 z-10">
+<div id="prev-slide" class="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 backdrop-blur-sm cursor-pointer rounded-full transition-all duration-300 hover:bg-white hover:text-primary">
+<i class="ri-arrow-left-s-line text-white"></i>
+</div>
+<div id="next-slide" class="w-10 h-10 flex items-center justify-center bg-white cursor-pointer rounded-full transition-all duration-300 hover:bg-opacity-90">
+<i class="ri-arrow-right-s-line text-primary"></i>
+</div>
+</div>
+</section>
+<!-- Category Previews -->
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-light text-center mb-12">Shop by Category</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<a href="#men" class="category-card relative overflow-hidden group">
+<img src="https://readdy.ai/api/search-image?query=elegant%20male%20model%20wearing%20stylish%20black%20suit%20against%20white%20background%2C%20professional%20fashion%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20sophisticated%20pose&width=600&height=800&seq=2&orientation=portrait" alt="Men's Collection" class="w-full h-[500px] object-cover transition-transform duration-700 ease-in-out">
+<div class="category-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<div class="text-center">
+<h3 class="text-white text-3xl font-light mb-4">Men</h3>
+<span class="inline-block px-6 py-2 border border-white text-white font-medium !rounded-button">Shop Now</span>
+</div>
+</div>
+</a>
+<a href="#women" class="category-card relative overflow-hidden group">
+<img src="https://readdy.ai/api/search-image?query=elegant%20female%20model%20wearing%20stylish%20black%20dress%20against%20white%20background%2C%20professional%20fashion%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20womenswear%2C%20monochromatic%20color%20scheme%2C%20sophisticated%20pose&width=600&height=800&seq=3&orientation=portrait" alt="Women's Collection" class="w-full h-[500px] object-cover transition-transform duration-700 ease-in-out">
+<div class="category-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<div class="text-center">
+<h3 class="text-white text-3xl font-light mb-4">Women</h3>
+<span class="inline-block px-6 py-2 border border-white text-white font-medium !rounded-button">Shop Now</span>
+</div>
+</div>
+</a>
+<a href="#kids" class="category-card relative overflow-hidden group">
+<img src="https://readdy.ai/api/search-image?query=stylish%20children%20models%20wearing%20elegant%20black%20and%20white%20clothing%20against%20white%20background%2C%20professional%20fashion%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20kidswear%2C%20monochromatic%20color%20scheme%2C%20playful%20yet%20sophisticated%20poses&width=600&height=800&seq=4&orientation=portrait" alt="Kids' Collection" class="w-full h-[500px] object-cover transition-transform duration-700 ease-in-out">
+<div class="category-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<div class="text-center">
+<h3 class="text-white text-3xl font-light mb-4">Kids</h3>
+<span class="inline-block px-6 py-2 border border-white text-white font-medium !rounded-button">Shop Now</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- New Arrivals Section -->
+<section class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-light text-center mb-4">New Arrivals</h2>
+<p class="text-gray-600 text-center mb-12">Discover our latest collection of premium fashion pieces</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20blazer%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=5&orientation=portrait" alt="Black Tailored Blazer" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Black Tailored Blazer</h3>
+<p class="text-gray-900 font-semibold mt-1">$249.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20white%20silk%20blouse%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20womenswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=6&orientation=portrait" alt="Silk Button-Up Blouse" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Silk Button-Up Blouse</h3>
+<p class="text-gray-900 font-semibold mt-1">$179.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20wool%20coat%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20outerwear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=7&orientation=portrait" alt="Wool Overcoat" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Wool Overcoat</h3>
+<p class="text-gray-900 font-semibold mt-1">$329.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20dress%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20womenswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=8&orientation=portrait" alt="Classic Black Dress" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Classic Black Dress</h3>
+<p class="text-gray-900 font-semibold mt-1">$219.00</p>
+</div>
+</div>
+<div class="text-center mt-12">
+<button class="border border-gray-900 text-gray-900 px-8 py-3 font-medium !rounded-button hover:bg-gray-900 hover:text-white transition-colors whitespace-nowrap">View All New Arrivals</button>
+</div>
+</div>
+</section>
+<!-- Seasonal Picks Section -->
+<section class="py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-light text-center mb-4">Seasonal Picks</h2>
+<p class="text-gray-600 text-center mb-12">Curated selection for the current season</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20white%20linen%20shirt%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=9&orientation=portrait" alt="Linen Button-Down Shirt" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Linen Button-Down Shirt</h3>
+<p class="text-gray-900 font-semibold mt-1">$149.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20wide-leg%20pants%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20womenswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=10&orientation=portrait" alt="Wide-Leg Trousers" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Wide-Leg Trousers</h3>
+<p class="text-gray-900 font-semibold mt-1">$189.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20leather%20boots%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20footwear%2C%20monochromatic%20color%20scheme%2C%20detailed%20leather%20texture%20visible&width=500&height=600&seq=11&orientation=portrait" alt="Leather Chelsea Boots" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Leather Chelsea Boots</h3>
+<p class="text-gray-900 font-semibold mt-1">$279.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20white%20cashmere%20sweater%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20knitwear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=12&orientation=portrait" alt="Cashmere Sweater" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Cashmere Sweater</h3>
+<p class="text-gray-900 font-semibold mt-1">$249.00</p>
+</div>
+</div>
+<div class="text-center mt-12">
+<a href="Seasonal Picks.html" data-readdy="true">
+<button class="border border-gray-900 text-gray-900 px-8 py-3 font-medium !rounded-button hover:bg-gray-900 hover:text-white transition-colors whitespace-nowrap">View All Seasonal Picks</button>
+</a>
+</div>
+</div>
+</section>
+<!-- Category Page - Men -->
+<section id="men" class="py-20">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-light text-center mb-12">Men's Collection</h2>
+<div class="flex flex-col md:flex-row">
+<!-- Filters Sidebar -->
+<div class="w-full md:w-1/4 pr-0 md:pr-8 mb-8 md:mb-0">
+<div class="sticky top-24">
+<div class="mb-8">
+<h3 class="text-lg font-medium mb-4">Categories</h3>
+<ul class="space-y-3">
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox" checked>
+<span class="checkmark"></span>
+</label>
+<span>All</span>
+</li>
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+</label>
+<span>Shirts</span>
+</li>
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+</label>
+<span>Suits</span>
+</li>
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+</label>
+<span>Trousers</span>
+</li>
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+</label>
+<span>Outerwear</span>
+</li>
+<li class="flex items-center">
+<label class="custom-checkbox">
+<input type="checkbox">
+<span class="checkmark"></span>
+</label>
+<span>Accessories</span>
+</li>
+</ul>
+</div>
+<div class="mb-8">
+<h3 class="text-lg font-medium mb-4">Size</h3>
+<div class="flex flex-wrap gap-2">
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">XS</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">S</button>
+<button class="w-10 h-10 border border-black bg-black text-white flex items-center justify-center">M</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">L</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">XL</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">XXL</button>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-lg font-medium mb-4">Color</h3>
+<div class="flex flex-wrap gap-2">
+<button class="w-8 h-8 rounded-full bg-black border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-white border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-gray-500 border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-blue-800 border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-green-800 border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-red-800 border-2 border-gray-300"></button>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-lg font-medium mb-4">Price Range</h3>
+<input type="range" min="0" max="1000" value="500" class="range-slider mb-4">
+<div class="flex justify-between">
+<span>$0</span>
+<span>$1000</span>
+</div>
+</div>
+<button class="w-full bg-black text-white py-3 font-medium !rounded-button whitespace-nowrap">Apply Filters</button>
+</div>
+</div>
+<!-- Products Grid -->
+<div class="w-full md:w-3/4">
+<div class="flex justify-between items-center mb-8">
+<p class="text-gray-600">Showing 12 of 36 products</p>
+<div class="relative">
+<button class="flex items-center space-x-2 border border-gray-300 px-4 py-2 !rounded-button">
+<span>Sort by: Featured</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20suit%20jacket%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=13&orientation=portrait" alt="Slim Fit Suit Jacket" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Slim Fit Suit Jacket</h3>
+<p class="text-gray-900 font-semibold mt-1">$349.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20white%20dress%20shirt%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=14&orientation=portrait" alt="Oxford Dress Shirt" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Oxford Dress Shirt</h3>
+<p class="text-gray-900 font-semibold mt-1">$129.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20wool%20trousers%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=15&orientation=portrait" alt="Wool Dress Trousers" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Wool Dress Trousers</h3>
+<p class="text-gray-900 font-semibold mt-1">$179.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20leather%20belt%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%20accessories%2C%20monochromatic%20color%20scheme%2C%20detailed%20leather%20texture%20visible&width=500&height=600&seq=16&orientation=portrait" alt="Leather Belt" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Leather Belt</h3>
+<p class="text-gray-900 font-semibold mt-1">$89.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20cashmere%20scarf%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%20accessories%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible&width=500&height=600&seq=17&orientation=portrait" alt="Cashmere Scarf" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Cashmere Scarf</h3>
+<p class="text-gray-900 font-semibold mt-1">$119.00</p>
+</div>
+<div class="product-card group">
+<div class="relative overflow-hidden mb-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20leather%20gloves%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%20accessories%2C%20monochromatic%20color%20scheme%2C%20detailed%20leather%20texture%20visible&width=500&height=600&seq=18&orientation=portrait" alt="Leather Gloves" class="w-full h-[350px] object-cover transition-transform duration-500">
+<div class="quick-view absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+<button class="bg-white text-primary px-4 py-2 font-medium !rounded-button whitespace-nowrap">Quick View</button>
+</div>
+</div>
+<h3 class="text-gray-800 font-medium">Leather Gloves</h3>
+<p class="text-gray-900 font-semibold mt-1">$99.00</p>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<div class="flex space-x-2">
+<button class="w-10 h-10 bg-black text-white flex items-center justify-center !rounded-button">1</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center !rounded-button hover:border-black transition-colors">2</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center !rounded-button hover:border-black transition-colors">3</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center !rounded-button hover:border-black transition-colors">
+<i class="ri-arrow-right-s-line"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-20 bg-gray-900 text-white">
+<div class="container mx-auto px-4">
+<div class="max-w-2xl mx-auto text-center">
+<h2 class="text-3xl font-light mb-4">Subscribe to Our Newsletter</h2>
+<p class="text-gray-300 mb-8">Stay updated with our latest collections and exclusive offers</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 border-none !rounded-button bg-white text-gray-900 focus:outline-none">
+<button class="bg-white text-primary px-8 py-3 font-medium !rounded-button hover:bg-gray-100 transition-colors whitespace-nowrap">Subscribe</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-white py-16">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<h3 class="text-xl font-medium mb-6">InduReadyMade</h3>
+<p class="text-gray-600 mb-6">Premium clothing for the modern individual. Timeless elegance meets contemporary design.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors">
+<i class="ri-twitter-x-line"></i>
+</a>
+<a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors">
+<i class="ri-pinterest-line"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-medium mb-6">Shop</h3>
+<ul class="space-y-4">
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Men's Collection</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Women's Collection</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Kids' Collection</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">New Arrivals</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Sale</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-medium mb-6">Company</h3>
+<ul class="space-y-4">
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">About Us</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Careers</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Sustainability</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Press</a></li>
+<li><a href="#" class="text-gray-600 hover:text-black transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-medium mb-6">Contact Us</h3>
+<ul class="space-y-4">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+<i class="ri-map-pin-line text-gray-600"></i>
+</div>
+<span class="text-gray-600">123 Fashion Avenue, New York, NY 10001, USA</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-3">
+<i class="ri-phone-line text-gray-600"></i>
+</div>
+<span class="text-gray-600">+1 (212) 555-7890</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-3">
+<i class="ri-mail-line text-gray-600"></i>
+</div>
+<span class="text-gray-600">info@indureadymade.com</span>
+</li>
+</ul>
+<div class="mt-6">
+<h4 class="text-sm font-medium mb-3">We Accept</h4>
+<div class="flex space-x-3">
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-visa-fill text-gray-600 text-xl"></i>
+</div>
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-mastercard-fill text-gray-600 text-xl"></i>
+</div>
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill text-gray-600 text-xl"></i>
+</div>
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-apple-fill text-gray-600 text-xl"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-600 mb-4 md:mb-0">© 2025 InduReadyMade. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-600 hover:text-black transition-colors">Privacy Policy</a>
+<a href="#" class="text-gray-600 hover:text-black transition-colors">Terms of Service</a>
+<a href="#" class="text-gray-600 hover:text-black transition-colors">Shipping Info</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Product Quick View Modal -->
+<div class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none">
+<div class="product-modal bg-white w-full max-w-4xl p-8 !rounded-lg opacity-0">
+<div class="flex justify-end mb-4">
+<button class="close-modal w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded-full transition-colors">
+<i class="ri-close-line text-gray-700 ri-lg"></i>
+</button>
+</div>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="w-full md:w-1/2">
+<img src="https://readdy.ai/api/search-image?query=elegant%20black%20tailored%20blazer%20on%20white%20background%2C%20professional%20product%20photography%2C%20minimalist%20aesthetic%2C%20high%20contrast%2C%20clean%20composition%2C%20luxury%20menswear%2C%20monochromatic%20color%20scheme%2C%20detailed%20fabric%20texture%20visible%2C%20multiple%20angles&width=600&height=700&seq=19&orientation=portrait" alt="Black Tailored Blazer" class="w-full h-auto object-cover">
+</div>
+<div class="w-full md:w-1/2">
+<h2 class="text-2xl font-medium mb-2">Black Tailored Blazer</h2>
+<p class="text-xl font-semibold mb-4">$249.00</p>
+<div class="mb-6">
+<p class="text-gray-600">A timeless black blazer crafted from premium Italian wool. Features a slim fit, notched lapels, and a two-button closure. Perfect for formal occasions or elevating your everyday style.</p>
+</div>
+<div class="mb-6">
+<h3 class="text-lg font-medium mb-3">Size</h3>
+<div class="flex space-x-3">
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">XS</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">S</button>
+<button class="w-10 h-10 border border-black bg-black text-white flex items-center justify-center">M</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">L</button>
+<button class="w-10 h-10 border border-gray-300 flex items-center justify-center hover:border-black transition-colors">XL</button>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-lg font-medium mb-3">Color</h3>
+<div class="flex space-x-3">
+<button class="w-8 h-8 rounded-full bg-black border-2 border-gray-300"></button>
+<button class="w-8 h-8 rounded-full bg-gray-700 border-2 border-transparent"></button>
+<button class="w-8 h-8 rounded-full bg-blue-900 border-2 border-transparent"></button>
+</div>
+</div>
+<button class="w-full bg-black text-white py-3 font-medium !rounded-button hover:bg-gray-900 transition-colors mb-4 whitespace-nowrap">Add to Cart</button>
+<button class="w-full border border-black text-black py-3 font-medium !rounded-button hover:bg-black hover:text-white transition-colors whitespace-nowrap">View Full Details</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Hero Carousel
+const heroSection = document.getElementById('hero-carousel');
+const heroContents = document.querySelectorAll('.hero-content');
+const prevButton = document.getElementById('prev-slide');
+const nextButton = document.getElementById('next-slide');
+let currentSlide = 1;
+const totalSlides = heroContents.length;
+const heroImages = [
+'https://readdy.ai/api/search-image?query=high-end%20fashion%20photography%20with%20elegant%20models%20wearing%20stylish%20black%20and%20white%20clothing%2C%20professional%20studio%20lighting%2C%20minimalist%20clean%20background%2C%20high%20contrast%2C%20fashion%20editorial%20style%2C%20monochromatic%20color%20scheme%2C%20dramatic%20shadows%2C%20luxury%20fashion%20aesthetic&width=1920&height=1080&seq=1&orientation=landscape',
+'https://readdy.ai/api/search-image?query=luxury%20fashion%20editorial%20with%20models%20in%20designer%20evening%20wear%2C%20dramatic%20lighting%2C%20minimalist%20studio%20setting%2C%20high%20fashion%20photography%2C%20black%20and%20white%20aesthetic%2C%20artistic%20composition&width=1920&height=1080&seq=2&orientation=landscape',
+'https://readdy.ai/api/search-image?query=contemporary%20fashion%20photography%20with%20models%20in%20premium%20casual%20wear%2C%20clean%20white%20background%2C%20professional%20lighting%2C%20editorial%20style%2C%20minimalist%20aesthetic%2C%20sophisticated%20mood&width=1920&height=1080&seq=3&orientation=landscape'
+];
+function updateSlide(direction) {
+const currentContent = document.querySelector(`.hero-content[data-slide="${currentSlide}"]`);
+currentContent.classList.add('hidden');
+if (direction === 'next') {
+currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+} else {
+currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+}
+const nextContent = document.querySelector(`.hero-content[data-slide="${currentSlide}"]`);
+nextContent.classList.remove('hidden');
+heroSection.style.backgroundImage = `url('${heroImages[currentSlide - 1]}')`;
+}
+nextButton.addEventListener('click', () => updateSlide('next'));
+prevButton.addEventListener('click', () => updateSlide('prev'));
+// Product Quick View Modal
+const quickViewButtons = document.querySelectorAll('.quick-view button');
+const modal = document.querySelector('.modal');
+const closeModal = document.querySelector('.close-modal');
+quickViewButtons.forEach(button => {
+button.addEventListener('click', function() {
+modal.classList.add('active');
+modal.style.opacity = '1';
+modal.style.pointerEvents = 'auto';
+});
+});
+closeModal.addEventListener('click', function() {
+modal.classList.remove('active');
+modal.style.opacity = '0';
+modal.style.pointerEvents = 'none';
+});
+modal.addEventListener('click', function(e) {
+if (e.target === modal) {
+modal.classList.remove('active');
+modal.style.opacity = '0';
+modal.style.pointerEvents = 'none';
+}
+});
+});
+document.addEventListener('DOMContentLoaded', function() {
+// Custom checkbox functionality
+const checkboxes = document.querySelectorAll('.custom-checkbox input');
+checkboxes.forEach(checkbox => {
+checkbox.addEventListener('change', function() {
+// Add any additional functionality here if needed
+});
+});
+// Custom radio functionality
+const radios = document.querySelectorAll('.custom-radio input');
+radios.forEach(radio => {
+radio.addEventListener('change', function() {
+// Add any additional functionality here if needed
+});
+});
+// Custom switch functionality
+const switches = document.querySelectorAll('.custom-switch input');
+switches.forEach(switchEl => {
+switchEl.addEventListener('change', function() {
+// Add any additional functionality here if needed
+});
+});
+// Range slider functionality
+const rangeSliders = document.querySelectorAll('.range-slider');
+rangeSliders.forEach(slider => {
+slider.addEventListener('input', function() {
+// Add any additional functionality here if needed
+});
+});
+});
+</script>
+</body>
+</html>
